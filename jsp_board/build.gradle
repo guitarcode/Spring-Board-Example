@@ -24,21 +24,22 @@ tasks.withType(JavaCompile) {
 dependencies {
     compileOnly('javax.servlet:javax.servlet-api:4.0.1')
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
-//  MariaDB
-    implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
+//  Mysql
+    implementation 'mysql:mysql-connector-java:8.0.30'
 //  hikariCP
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.0'
 //  log4j
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.1'
-
+// mybatis
+    implementation 'org.mybatis:mybatis:3.5.10'
 }
 
 test {
