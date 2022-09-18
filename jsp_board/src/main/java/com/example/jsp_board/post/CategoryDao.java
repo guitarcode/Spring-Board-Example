@@ -6,13 +6,21 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 
-public interface CategoryDao {
-//    private final String dbURL = "jdbc:mysql://localhost:3306/board_study?allowPublicKeyRetrieval=true";
-//    private final String dbUser = "root";
-//    private final String dbPassword = "chltpals1!";
+public class CategoryDAO {
 
+    private SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
 
-    List<CategoryVO> categoryList();
+    public List<CategoryVO> categoryList(){
+        try {
+            SqlSession session = sqlSessionFactory.openSession();
+            List<CategoryVO> categoryList = session.selectList("categoryList");
+            session.close();
+            return categoryList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 //        try {
 //            Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
 //            String query = "select * from category order by name";

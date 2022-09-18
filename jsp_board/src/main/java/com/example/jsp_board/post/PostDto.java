@@ -1,19 +1,19 @@
 package com.example.jsp_board.post;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class PostDto {
-    private int boardId;
+    private int postId;
+    private int categoryId;
     private String title;
-    private LocalDateTime createdTime;
-    private String name;
+    private LocalDateTime createdAt;
+    private String writer;
     private String password;
     private String passwordConfirm;
+    private String content;
 }

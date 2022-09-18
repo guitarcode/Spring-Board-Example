@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CategoryDto {
+public class CategoryDTO {
     private int categoryId;
     private String name;
 }
