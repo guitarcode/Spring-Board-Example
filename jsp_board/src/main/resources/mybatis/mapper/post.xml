@@ -5,5 +5,9 @@
         INSERT INTO post (post_id, category_id, writer, password, title, content, created_at )
         VALUES (NULL, #{categoryId}, #{writer}, #{password}, #{title}, #{content}, #{createdAt})
     </insert>
-
+    <select id="postList" parameterType="">
+        SELECT *
+        FROM post
+        WHERE created_at between #{startDate} and #{endDate}
+    </select>
 </mapper>

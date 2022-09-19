@@ -20,14 +20,7 @@
     <title>Title</title>
 </head>
 <body>
-<%--    <%--%>
 
-<%--        PostDto post = PostDto.builder()--%>
-<%--                .title(request.getParameter("title"))--%>
-<%--                .categoryId(Integer.parseInt(request.getParameter("categoryId")))--%>
-<%--                .writer(request.getParameter("writer"))--%>
-<%--                .build();--%>
-<%--    %>--%>
 
     <%= post.getCategoryId() %>
     <%= post.getWriter() %>
