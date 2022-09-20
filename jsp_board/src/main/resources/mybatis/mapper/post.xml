@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.jsp_board.post.PostDao">
-    <insert id="postCreate" parameterType="com.example.jsp_board.post.PostDto">
+<mapper namespace="com.example.jsp_board.post.PostDAO">
+    <insert id="postCreate" parameterType="com.example.jsp_board.post.PostCreateDTO">
         INSERT INTO post (post_id, category_id, writer, password, title, content, created_at )
         VALUES (NULL, #{categoryId}, #{writer}, #{password}, #{title}, #{content}, #{createdAt})
     </insert>
-    <select id="postList" parameterType="">
+    <select id="postList" parameterType="com.example.jsp_board.post.SearchVO"
+            resultType="com.example.jsp_board.post.PostReturnDTO">
         SELECT *
         FROM post
-        WHERE created_at between #{startDate} and #{endDate}
+        WHERE title rlike #{searchQuery}
     </select>
 </mapper>

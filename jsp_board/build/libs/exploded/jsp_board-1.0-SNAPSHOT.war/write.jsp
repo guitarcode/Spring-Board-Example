@@ -27,12 +27,10 @@
 <style>
     .main {
         display: grid;
-        background-color: grey;
         column-gap: 25px;
         width: 610px;
         margin: 100px auto;
         border: 1px solid #ebebeb;
-        border-radius: 10px;
         box-shadow: 0 1px 20px 0 rgba(0,0,0,0.1);
         padding: 50px 50px 50px 20px;
     }
