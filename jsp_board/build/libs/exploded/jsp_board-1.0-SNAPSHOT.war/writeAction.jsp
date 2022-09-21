@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="com.example.jsp_board.post.PostDAO" %>
+<%@ page import="java.io.PrintWriter" %>
 <%  request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="post" class="com.example.jsp_board.post.PostCreateDTO" scope="page" />
 <jsp:setProperty name="post" property="categoryId" />
@@ -26,6 +27,12 @@
     <%
         PostDAO postDao = new PostDAO();
         postDao.createPost(post);
+    %>
+    <%
+        PrintWriter script = response.getWriter();
+        script.println("<script>" +
+                "location.href=window.location.origin+'/post'" +
+                "</script>'");
     %>
 </body>
 </html>

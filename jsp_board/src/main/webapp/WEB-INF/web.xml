@@ -5,11 +5,11 @@
          version="4.0">
     <servlet>
         <servlet-name>Home</servlet-name>
-        <jsp-file>/board.jsp</jsp-file>
+        <jsp-file>/list.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
-        <url-pattern>/post</url-pattern>
+        <url-pattern>/board/list</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Write</servlet-name>
@@ -17,7 +17,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Write</servlet-name>
-        <url-pattern>/post/create</url-pattern>
+        <url-pattern>/board/write</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>PostDetail</servlet-name>
@@ -25,6 +25,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>PostDetail</servlet-name>
-        <url-pattern>/post/detail</url-pattern>
+        <url-pattern>/board/detail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>WriteAction</servlet-name>
+        <jsp-file>/writeAction.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WriteAction</servlet-name>
+        <url-pattern>/board/write/action</url-pattern>
     </servlet-mapping>
 </web-app>

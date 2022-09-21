@@ -16,11 +16,13 @@ public class SearchVO {
     private String searchQuery;
     private int page;
     private int offset;
+    private Integer categoryId;
 
     public SearchVO(HttpServletRequest request){
         String startString = request.getParameter("start_day");
         String endString = request.getParameter("end_day");
         String page = request.getParameter("page");
+        String categoryIdString = request.getParameter("category_id");
 
         this.searchQuery = request.getParameter("query");
         this.startDay = startString == null ? null : LocalDate.parse(startString);
@@ -28,7 +30,9 @@ public class SearchVO {
         this.endDay = endString == null ? null : LocalDate.parse(endString).plusDays(1L);
         this.page = page == null ? 1 : Integer.parseInt(page);
         this.offset = (this.page - 1) * 10;
+        this.categoryId = categoryIdString == null ? null : Integer.parseInt(categoryIdString);
     }
+
 
     public String getSearchQueryValue() {
         if(searchQuery == null)

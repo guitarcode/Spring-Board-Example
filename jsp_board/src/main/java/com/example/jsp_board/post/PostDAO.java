@@ -45,7 +45,7 @@ public class PostDAO {
     public PostReturnDTO postDetail(int postId){
         try{
             SqlSession session = sqlSessionFactory.openSession();
-            PostReturnDTO post = session.selectOne("postList", postId);
+            PostReturnDTO post = session.selectOne("postDetail", postId);
             return post;
         } catch (Exception e) {
             e.printStackTrace();

@@ -54,7 +54,7 @@
 <body>
     <div class="main">
         <p>글 작성하기</p>
-        <form id="post-form" method="post" action="writeAction.jsp">
+        <form id="post-form" method="post" action="/post/create/action">
             <select name="categoryId">
                 <%
                     CategoryDAO categoryDAO = new CategoryDAO();
