@@ -19,4 +19,12 @@
         <servlet-name>Write</servlet-name>
         <url-pattern>/post/create</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PostDetail</servlet-name>
+        <jsp-file>/postDetail.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostDetail</servlet-name>
+        <url-pattern>/post/detail</url-pattern>
+    </servlet-mapping>
 </web-app>

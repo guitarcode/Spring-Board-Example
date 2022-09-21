@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PostReturnDTO {
     private int postId;
-    private int categoryId;
+    private String categoryName;
     private String title;
     private LocalDateTime createdAt;
     private String writer;

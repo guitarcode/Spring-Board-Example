@@ -5,13 +5,31 @@
         INSERT INTO post (post_id, category_id, writer, password, title, content, created_at )
         VALUES (NULL, #{categoryId}, #{writer}, #{password}, #{title}, #{content}, #{createdAt})
     </insert>
-    <select id="postList" parameterType="com.example.jsp_board.post.SearchVO"
-            resultType="com.example.jsp_board.post.PostReturnDTO">
-        SELECT *
+
+    <select id="postCount" parameterType="com.example.jsp_board.post.SearchVO" resultType="_int">
+        SELECT count(*)
         FROM post
         <where>
+            <if test="searchQuery != null">
+                title rlike #{searchQuery} or writer rlike #{searchQuery} or content rlike #{searchQuery}
+            </if>
+            <if test="startDay != null">
+                and created_at &gt;= #{startDay}
+            </if>
+            <if test="endDay != null">
+                and created_at &lt; #{endDay}
+            </if>
+        </where>
+    </select>
+
+    <select id="postList" parameterType="com.example.jsp_board.post.SearchVO"
+            resultType="com.example.jsp_board.post.PostReturnDTO">
+        SELECT post_id, writer, title, content, created_at, name category_name
+        FROM post
+        JOIN category c on c.category_id = post.category_id
+        <where>
         <if test="searchQuery != null">
-            title rlike #{searchQuery}
+            title rlike #{searchQuery} or writer rlike #{searchQuery} or content rlike #{searchQuery}
         </if>
         <if test="startDay != null">
             and created_at &gt;= #{startDay}
@@ -20,5 +38,14 @@
             and created_at &lt; #{endDay}
         </if>
         </where>
+        LIMIT 10 OFFSET #{offset}
+    </select>
+
+    <select id="postDetail" parameterType="_int"
+            resultType="com.example.jsp_board.post.PostReturnDTO">
+        SELECT post_id, writer, title, content, created_at, name category_name
+        FROM post
+        JOIN category c ON c.category_id = post.category_id
+        WHERE post_id = #{postId}
     </select>
 </mapper>
