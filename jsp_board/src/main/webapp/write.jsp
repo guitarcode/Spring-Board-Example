@@ -38,13 +38,24 @@
         margin: 5px;
     }
     button{
-        justify-content: flex-end;
+        margin-left: auto;
     }
     #content {
-        width: 600px;
+        width: 90%;
         height: 400px;
         vertical-align: top;
     }
+    table {
+        width: 610px;
+    }
+    .table-title {
+        background: bisque;
+    }
+
+    td {
+        border-bottom: black solid 1px;
+    }
+
 
 </style>
 <html>
@@ -53,8 +64,11 @@
 </head>
 <body>
     <div class="main">
-        <p>글 작성하기</p>
+        <p>게시글 - 등록</p>
         <form id="post-form" method="post" action="/post/create/action">
+            <table>
+            <tr>
+                <td class="table-title">카테고리<td>
             <select name="categoryId">
                 <%
                     CategoryDAO categoryDAO = new CategoryDAO();
@@ -65,19 +79,32 @@
                 <%
                     }
                 %>
+                </td>
             </select>
-            </br>
-            <input type="text" name="writer" minlength="3" maxlength="4" placeholder="작성자">
-            </br>
-            <input id="pw" type="password" name="password" minlength="4" maxlength="16" placeholder="비밀번호">
-            <p id="pw-warn" style="color:red; padding: 0px; margin: 0px;"></p>
-            <input id="pw-con" type="password" name="password_confirm" minlength="4" maxlength="16" placeholder="비밀번호 확인">
-            </br>
-            <input type="text" name="title" minlength="4" maxlength="100" placeholder="제목">
-            </br>
+            </tr>
+            <tr>
+                <td class="table-title">작성자</td>
+                <td><input type="text" name="writer" minlength="3" maxlength="4" placeholder="작성자"></td>
+            </tr>
+            <tr>
+                <td class="table-title">비밀번호</td>
+                <td>
+                    <input id="pw" type="password" name="password" minlength="4" maxlength="16" placeholder="비밀번호">
+                    <input id="pw-con" type="password" name="password_confirm" minlength="4" maxlength="16" placeholder="비밀번호 확인">
+                </td>
+                <p id="pw-warn" style="color:red; padding: 0px; margin: 0px;"></p>
+            </tr>
+            <tr>
+                <td class="table-title">제목</td>
+                <td><input type="text" name="title" minlength="4" maxlength="100" placeholder="제목"></td>
+            </tr>
+            <tr>
+                <td class="table-title">내용</td>
+                <td><textarea id="content" name="content" placeholder="내용"></textarea></td>
+            </tr>
+          </table>
 
-            <textarea id="content" name="content" placeholder="내용"></textarea>
-            <button type="button" onclick="pwd_chk()">글 작성</button>
+        <button type="button" onclick="pwd_chk()">글 작성</button>
         </form>
     </div>
 </body>

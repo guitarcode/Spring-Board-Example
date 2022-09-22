@@ -155,7 +155,6 @@
                 <td>카테고리</td>
             </tr>
             <%
-                System.out.println(searchVO);
                 List<PostReturnDTO> posts = postDAO.postList(searchVO);
                 for (PostReturnDTO post : posts) {
             %>

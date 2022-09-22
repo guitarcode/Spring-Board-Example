@@ -35,4 +35,12 @@
         <servlet-name>WriteAction</servlet-name>
         <url-pattern>/board/write/action</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CommentAction</servlet-name>
+        <jsp-file>/board/commentAction.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentAction</servlet-name>
+        <url-pattern>/board/detail/comment</url-pattern>
+    </servlet-mapping>
 </web-app>
