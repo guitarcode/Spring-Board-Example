@@ -27,7 +27,7 @@
 
     <select id="postList" parameterType="com.example.jsp_board.post.SearchVO"
             resultType="com.example.jsp_board.post.PostReturnDTO">
-        SELECT post_id, writer, title, content, created_at, name category_name
+        SELECT post_id, writer, title, created_at, modified_at, name category_name
         FROM post
         JOIN category c on c.category_id = post.category_id
         <where>
@@ -50,9 +50,32 @@
 
     <select id="postDetail" parameterType="_int"
             resultType="com.example.jsp_board.post.PostReturnDTO">
-        SELECT post_id, writer, title, content, created_at, name category_name
+        SELECT post_id, writer, title, content, created_at,modified_at, name category_name
         FROM post
         JOIN category c ON c.category_id = post.category_id
         WHERE post_id = #{postId}
     </select>
+
+    <select id="postAuth" parameterType="com.example.jsp_board.post.PostAuthVO"
+            resultType="com.example.jsp_board.post.PostReturnDTO">
+        SELECT post_id, writer, title, content, created_at, name category_name
+        FROM post
+        JOIN category c ON c.category_id = post.category_id
+        WHERE post_id = #{postId} and password = SHA2(#{password},256)
+    </select>
+
+    <update id="postUpdate" parameterType="com.example.jsp_board.post.PostUpdateDTO">
+        UPDATE post
+        SET
+            writer = #{writer},
+            title = #{title},
+            content = #{content},
+            modified_at = #{modifiedAt}
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="postDelete" parameterType="com.example.jsp_board.post.PostAuthVO">
+        DELETE FROM post
+        WHERE post_id = #{postId} and password = SHA2(#{password},256)
+    </delete>
 </mapper>

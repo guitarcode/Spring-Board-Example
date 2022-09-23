@@ -1,13 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.jsp_board.post.PostReturnDTO" %>
-<%@ page import="com.example.jsp_board.post.PostDAO" %>
-<%@ page import="com.example.jsp_board.post.CategoryDAO" %>
-<%@ page import="com.example.jsp_board.post.CategoryVO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.jsp_board.post.*" %>
+<%@ page import="java.io.PrintWriter" %>
 <%
     int postId = Integer.parseInt(request.getParameter("id"));
+    PostAuthVO postAuthVO = new PostAuthVO(postId, request.getParameter("password"));
     PostDAO postDAO = new PostDAO();
-    PostReturnDTO post = postDAO.postDetail(postId);
+    PostReturnDTO post = postDAO.postDetailToUpdate(postAuthVO);
+    if(post == null){
+        PrintWriter script = response.getWriter();
+        script.println("<script>" +
+                "alert('비밀번호가 틀렸습니다.') \n"  +
+                "window.history.back() \n" +
+                "</script>");
+    }
+    else{
 %>
 <script>
     function pwd_chk(){
@@ -20,7 +27,7 @@
         console.log(pw, pw_con)
         if(!(pw === pw_con)){
             pw_warn.innerText = "같은 비밀번호를 입력해야 합니다."
-            return false;
+            return false
         }
         else if(!regexPw.test(pw)) {
             pw_warn.innerText = "숫자, 영어, 특수문자를 포함해야 합니다."
@@ -72,22 +79,13 @@
 <body>
     <div class="main">
         <p>게시글 - 등록</p>
-        <form id="post-form" method="post" action="/post/create/action">
+        <form id="post-form" method="post" action="/board/update/action?id=<%=post.getPostId()%>">
             <table>
             <tr>
-                <td class="table-title">카테고리<td>
-            <select name="categoryId">
-                <%
-                    CategoryDAO categoryDAO = new CategoryDAO();
-                    List<CategoryVO> categoryList = categoryDAO.categoryList();
-                    for (CategoryVO category : categoryList) {
-                %>
-                <option value="<%= category.getCategoryId() %>" <%=post.getCategoryName().equals(category.getName()) ? "selected" : "" %>><%= category.getName() %></option>
-                <%
-                    }
-                %>
+                <td class="table-title">카테고리</td>
+                <td>
+                    <%=post.getCategoryName()%>
                 </td>
-            </select>
             </tr>
             <tr>
                 <td class="table-title">작성자</td>
@@ -102,9 +100,11 @@
                 <td><textarea id="content" name="content" placeholder="내용"><%=post.getContent()%></textarea></td>
             </tr>
           </table>
-
-        <button type="button" onclick="pwd_chk()">수정</button>
+            <input type="submit" value="저장">
         </form>
     </div>
 </body>
 </html>
+<%
+    }
+%>

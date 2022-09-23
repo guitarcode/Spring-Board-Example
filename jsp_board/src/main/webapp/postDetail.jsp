@@ -98,8 +98,8 @@
         </span>
         <span class="writer-date">
             <pre class="left-container">작성자: <%=post.getWriter()%></pre>
-            <pre class="right-container">수정 일시 <%=post.getCreatedAt().toString()%></pre>
-            <pre class="right-container">등록 일시 <%=post.getCreatedAt().toString()%>    </pre>
+            <pre class="right-container">수정 일시 <%=post.getModifiedAt()==null ? "-":post.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd H:mm"))%> </pre>
+            <pre class="right-container">등록 일시 <%=post.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd H:mm"))%>    </pre>
         </span>
         <span class = "content">
             <p><%=post.getContent()%></p>
@@ -121,6 +121,10 @@
                 }
             %>
         </div>
+        <span>
+            <a href="/board/update/check?id=<%=postId%>"><button>수정</button></a>
+            <a href="/board/delete/check?id=<%=postId%>"><button>삭제</button></a>
+        </span>
     </div>
 </body>
 </html>

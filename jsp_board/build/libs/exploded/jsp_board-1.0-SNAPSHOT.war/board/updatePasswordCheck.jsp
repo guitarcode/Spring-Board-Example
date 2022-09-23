@@ -25,9 +25,10 @@
 <body>
     <div id="main">
         <span>
-            <form method="post" action="/board/update">
+            <form method="post" action="/board/update?id=<%=request.getParameter("id")%>">
             <p>비밀번호 확인</p>
-            <input name="password">
+            <input type="password" name="password">
+            <input type="submit" value="확인">
             </form>
         </span>
     </div>

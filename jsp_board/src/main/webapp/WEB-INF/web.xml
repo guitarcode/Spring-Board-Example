@@ -44,11 +44,43 @@
         <url-pattern>/board/detail/comment</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>UpdatePostPwCheck</servlet-name>
+        <jsp-file>/board/updatePasswordCheck.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdatePostPwCheck</servlet-name>
+        <url-pattern>/board/update/check</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>UpdatePost</servlet-name>
         <jsp-file>/board/update.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdatePost</servlet-name>
         <url-pattern>/board/update</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdatePostAction</servlet-name>
+        <jsp-file>/board/updateAction.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdatePostAction</servlet-name>
+        <url-pattern>/board/update/action</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeletePostCheck</servlet-name>
+        <jsp-file>/board/deletePasswordCheck.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePostCheck</servlet-name>
+        <url-pattern>/board/delete/check</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeletePost</servlet-name>
+        <jsp-file>/board/deleteAction.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePost</servlet-name>
+        <url-pattern>/board/delete</url-pattern>
     </servlet-mapping>
 </web-app>
