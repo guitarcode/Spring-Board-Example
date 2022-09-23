@@ -14,10 +14,11 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%
     int postId = Integer.parseInt(request.getParameter("id"));
+    PostDAO postDAO = PostDAO.getInstance();
+    postDAO.postHitIncrease(postId);
+    PostReturnDTO post = postDAO.postDetail(postId);
     CommentDAO commentDAO = new CommentDAO();
     List<CommentReturnDTO> comments = commentDAO.getComments(postId);
-    PostDAO postDAO = new PostDAO();
-    PostReturnDTO post = postDAO.postDetail(postId);
 %>
 <style>
     #main {
@@ -93,8 +94,9 @@
 <body>
     <div id="main">
         <span class = "title">
-        <pre class="left-container">[<%=post.getCategoryName()%>] </pre>
-        <pre class="left-container"><%=post.getTitle()%></pre>
+            <pre class="left-container">[<%=post.getCategoryName()%>] </pre>
+            <pre class="left-container"><%=post.getTitle()%></pre>
+            <pre class="right-container" style="font-size: 12px; font-weight: unset">조회수 : <%=post.getHits()%></pre>
         </span>
         <span class="writer-date">
             <pre class="left-container">작성자: <%=post.getWriter()%></pre>

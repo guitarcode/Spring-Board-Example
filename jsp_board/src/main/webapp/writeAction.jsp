@@ -27,7 +27,7 @@
                 .passwordConfirm(request.getParameter("passwordConfirm"))
                 .createdAt(LocalDateTime.now())
                 .build();
-        PostDAO postDao = new PostDAO();
+        PostDAO postDao = PostDAO.getInstance();
         boolean success = postDao.createPost(post);
         PrintWriter script = response.getWriter();
     %>

@@ -25,8 +25,8 @@
             .content(request.getParameter("content"))
             .modifiedAt(LocalDateTime.now())
             .build();
-    PostDAO postDao = new PostDAO();
-    int success = postDao.postUpdate(post);
+    PostDAO postDAO = PostDAO.getInstance();
+    int success = postDAO.postUpdate(post);
     PrintWriter script = response.getWriter();
 %>
 <%

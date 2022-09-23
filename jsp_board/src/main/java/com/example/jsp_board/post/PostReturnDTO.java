@@ -13,6 +13,7 @@ public class PostReturnDTO {
     private String title;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private int hits;
     private String writer;
     private String content;
 }

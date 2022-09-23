@@ -27,7 +27,7 @@
 
     <select id="postList" parameterType="com.example.jsp_board.post.SearchVO"
             resultType="com.example.jsp_board.post.PostReturnDTO">
-        SELECT post_id, writer, title, created_at, modified_at, name category_name
+        SELECT post_id, writer, title, created_at, modified_at, name category_name, hits
         FROM post
         JOIN category c on c.category_id = post.category_id
         <where>
@@ -45,12 +45,20 @@
             and (title rlike #{searchQuery} or writer rlike #{searchQuery} or content rlike #{searchQuery})
         </if>
         </where>
+        ORDER BY post_id DESC
         LIMIT 10 OFFSET #{offset}
     </select>
 
+    <update id="increaseHit" parameterType="_int">
+        UPDATE post
+        SET
+            hits = hits+1
+        WHERE post_id = #{postId}
+    </update>
+
     <select id="postDetail" parameterType="_int"
             resultType="com.example.jsp_board.post.PostReturnDTO">
-        SELECT post_id, writer, title, content, created_at,modified_at, name category_name
+        SELECT post_id, writer, title, content, created_at,modified_at, name category_name, hits
         FROM post
         JOIN category c ON c.category_id = post.category_id
         WHERE post_id = #{postId}

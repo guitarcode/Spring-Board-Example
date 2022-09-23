@@ -5,7 +5,7 @@
 <%
     int postId = Integer.parseInt(request.getParameter("id"));
     PostAuthVO postAuthVO = new PostAuthVO(postId, request.getParameter("password"));
-    PostDAO postDAO = new PostDAO();
+    PostDAO postDAO = PostDAO.getInstance();
     PostReturnDTO post = postDAO.postDetailToUpdate(postAuthVO);
     if(post == null){
         PrintWriter script = response.getWriter();

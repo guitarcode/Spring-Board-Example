@@ -5,9 +5,10 @@
 <%@ page import="com.example.jsp_board.post.SearchVO" %>
 <%@ page import="com.example.jsp_board.post.CategoryDAO" %>
 <%@ page import="com.example.jsp_board.post.CategoryVO" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 <%
-    PostDAO postDAO = new PostDAO();
+    PostDAO postDAO = PostDAO.getInstance();
     SearchVO searchVO = new SearchVO(request);
     int postCount =postDAO.getPostCount(searchVO);
 %>
@@ -78,6 +79,7 @@
     }
     #table_title {
         background: antiquewhite;
+        text-align: center;
     }
     input {
         width: 200px;
@@ -103,6 +105,9 @@
     }
     .input-font-size {
         font-size: 16px;
+    }
+    .table-text-center{
+        text-align: center;
     }
 </style>
 <html>
@@ -149,10 +154,12 @@
         </span>
         <table>
             <tr id="table_title">
-                <td>제목</td>
-                <td>날짜</td>
-                <td>글쓴이</td>
-                <td>카테고리</td>
+                <td style="width: 8%">카테고리</td>
+                <td style="width: 40%">제목</td>
+                <td style="width: 8%">글쓴이</td>
+                <td style="width: 6%;">조회수</td>
+                <td style="width: 12%">등록 일시</td>
+                <td style="width: 12%">수정 일시</td>
             </tr>
             <%
                 List<PostReturnDTO> posts = postDAO.postList(searchVO);
@@ -160,10 +167,12 @@
             %>
 
             <tr>
+                <td class="table-text-center"><%= post.getCategoryName()%></td>
                 <td><a href="/board/detail?id=<%=post.getPostId()%>"><%= post.getTitle()%></a></td>
-                <td><%= post.getCreatedAt()%></td>
-                <td><%= post.getWriter()%></td>
-                <td><%= post.getCategoryName()%></td>
+                <td class="table-text-center"><%= post.getWriter()%></td>
+                <td class="table-text-center"><%=post.getHits()%></td>
+                <td class="table-text-center"><%= post.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd H:mm"))%></td>
+                <td class="table-text-center"><%=post.getModifiedAt()==null ? "-":post.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd H:mm"))%></td>
             </tr>
             <%
                 }
