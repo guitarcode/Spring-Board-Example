@@ -5,10 +5,9 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class PostCreateDTO {
-    private int postId;
     private int categoryId;
     private String title;
     private LocalDateTime createdAt;

@@ -20,8 +20,7 @@
             return false
         }
 
-        form.submit()
-
+        return true
     }
 </script>
 <style>
@@ -65,7 +64,7 @@
 <body>
     <div class="main">
         <p>게시글 - 등록</p>
-        <form id="post-form" method="post" action="/post/create/action">
+        <form id="post-form" method="post" action="/board/write/action" onsubmit="return pwd_chk()">
             <table>
             <tr>
                 <td class="table-title">카테고리<td>
@@ -90,9 +89,9 @@
                 <td class="table-title">비밀번호</td>
                 <td>
                     <input id="pw" type="password" name="password" minlength="4" maxlength="16" placeholder="비밀번호">
-                    <input id="pw-con" type="password" name="password_confirm" minlength="4" maxlength="16" placeholder="비밀번호 확인">
+                    <input id="pw-con" type="password" name="passwordConfirm" minlength="4" maxlength="16" placeholder="비밀번호 확인">
+                    <p id="pw-warn" style="color:red; padding-left: 8px; padding: 0px; margin: 0px; font-size: 10px"></p>
                 </td>
-                <p id="pw-warn" style="color:red; padding: 0px; margin: 0px;"></p>
             </tr>
             <tr>
                 <td class="table-title">제목</td>
@@ -104,7 +103,7 @@
             </tr>
           </table>
 
-        <button type="button" onclick="pwd_chk()">글 작성</button>
+        <input type="submit" value="작성" style="float: right"></button>
         </form>
     </div>
 </body>

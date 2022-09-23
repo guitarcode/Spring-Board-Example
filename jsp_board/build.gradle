@@ -40,6 +40,7 @@ dependencies {
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.1'
 // mybatis
     implementation 'org.mybatis:mybatis:3.5.10'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
 }
 
 test {

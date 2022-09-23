@@ -3,7 +3,7 @@
 <mapper namespace="com.example.jsp_board.post.PostDAO">
     <insert id="postCreate" parameterType="com.example.jsp_board.post.PostCreateDTO">
         INSERT INTO post (post_id, category_id, writer, password, title, content, created_at )
-        VALUES (NULL, #{categoryId}, #{writer}, #{password}, #{title}, #{content}, #{createdAt})
+        VALUES (NULL, #{categoryId}, #{writer}, SHA2(#{password},256), #{title}, #{content}, #{createdAt})
     </insert>
 
     <select id="postCount" parameterType="com.example.jsp_board.post.SearchVO" resultType="_int">

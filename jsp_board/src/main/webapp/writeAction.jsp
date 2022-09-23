@@ -8,31 +8,45 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="com.example.jsp_board.post.PostDAO" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="com.example.jsp_board.post.PostCreateDTO" %>
+<%@ page import="java.time.LocalDateTime" %>
 <%  request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="post" class="com.example.jsp_board.post.PostCreateDTO" scope="page" />
-<jsp:setProperty name="post" property="categoryId" />
-<jsp:setProperty name="post" property="writer" />
-<jsp:setProperty name="post" property="title" />
-<jsp:setProperty name="post" property="content" />
-<jsp:setProperty name="post" property="password" />
 
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <%= post.getCategoryId() %>
-    <%= post.getWriter() %>
-    <%= post.getContent()%>
     <%
+        PostCreateDTO post = PostCreateDTO.builder()
+                .categoryId(Integer.parseInt(request.getParameter("categoryId")))
+                .writer(request.getParameter("writer"))
+                .title(request.getParameter("title"))
+                .content(request.getParameter("content"))
+                .password(request.getParameter("password"))
+                .passwordConfirm(request.getParameter("passwordConfirm"))
+                .createdAt(LocalDateTime.now())
+                .build();
         PostDAO postDao = new PostDAO();
-        postDao.createPost(post);
+        boolean success = postDao.createPost(post);
+        PrintWriter script = response.getWriter();
     %>
     <%
-        PrintWriter script = response.getWriter();
-        script.println("<script>" +
-                "location.href=window.location.origin+'/post'" +
-                "</script>'");
+        if(success) {
+            script.println("<script>" +
+                    "location.href=window.location.origin+'/board/list'" +
+                    "</script>'");
+        }
+        else {
+            script.println("<script>" +
+                    "alert('유효성 검사 실패') \n"  +
+                    "window.history.back() \n" +
+                    "</script>");
+
+    %>
+    <p>게시글 작성에 실패했습니다.</p>
+    <%
+        }
     %>
 </body>
 </html>

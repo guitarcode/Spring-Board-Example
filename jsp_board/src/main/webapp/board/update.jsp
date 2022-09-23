@@ -1,7 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.jsp_board.post.PostReturnDTO" %>
+<%@ page import="com.example.jsp_board.post.PostDAO" %>
 <%@ page import="com.example.jsp_board.post.CategoryDAO" %>
 <%@ page import="com.example.jsp_board.post.CategoryVO" %>
 <%@ page import="java.util.List" %>
+<%
+    int postId = Integer.parseInt(request.getParameter("id"));
+    PostDAO postDAO = new PostDAO();
+    PostReturnDTO post = postDAO.postDetail(postId);
+%>
 <script>
     function pwd_chk(){
         const form = document.getElementById("post-form")
@@ -20,7 +27,8 @@
             return false
         }
 
-        return true
+        form.submit()
+
     }
 </script>
 <style>
@@ -64,7 +72,7 @@
 <body>
     <div class="main">
         <p>게시글 - 등록</p>
-        <form id="post-form" method="post" action="/board/write/action" onsubmit="return pwd_chk()">
+        <form id="post-form" method="post" action="/post/create/action">
             <table>
             <tr>
                 <td class="table-title">카테고리<td>
@@ -74,7 +82,7 @@
                     List<CategoryVO> categoryList = categoryDAO.categoryList();
                     for (CategoryVO category : categoryList) {
                 %>
-                <option value="<%= category.getCategoryId() %>"><%= category.getName() %></option>
+                <option value="<%= category.getCategoryId() %>" <%=post.getCategoryName().equals(category.getName()) ? "selected" : "" %>><%= category.getName() %></option>
                 <%
                     }
                 %>
@@ -83,27 +91,19 @@
             </tr>
             <tr>
                 <td class="table-title">작성자</td>
-                <td><input type="text" name="writer" minlength="3" maxlength="4" placeholder="작성자"></td>
-            </tr>
-            <tr>
-                <td class="table-title">비밀번호</td>
-                <td>
-                    <input id="pw" type="password" name="password" minlength="4" maxlength="16" placeholder="비밀번호">
-                    <input id="pw-con" type="password" name="passwordConfirm" minlength="4" maxlength="16" placeholder="비밀번호 확인">
-                    <p id="pw-warn" style="color:red; padding-left: 8px; padding: 0px; margin: 0px; font-size: 10px"></p>
-                </td>
+                <td><input type="text" name="writer" value="<%=post.getWriter()%>" placeholder readonly ="작성자"></td>
             </tr>
             <tr>
                 <td class="table-title">제목</td>
-                <td><input type="text" name="title" minlength="4" maxlength="100" placeholder="제목"></td>
+                <td><input type="text" name="title"  value="<%=post.getTitle()%>"  placeholder="제목"></td>
             </tr>
             <tr>
                 <td class="table-title">내용</td>
-                <td><textarea id="content" name="content" placeholder="내용"></textarea></td>
+                <td><textarea id="content" name="content" placeholder="내용"><%=post.getContent()%></textarea></td>
             </tr>
           </table>
 
-        <input type="submit" value="작성" style="float: right"></button>
+        <button type="button" onclick="pwd_chk()">수정</button>
         </form>
     </div>
 </body>

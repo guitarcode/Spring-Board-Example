@@ -2,26 +2,31 @@ package com.example.jsp_board.post;
 
 
 import com.example.jsp_board.util.MybatisSqlSessionFactory;
+import com.example.jsp_board.util.PostFormValidate;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import java.time.LocalDateTime;
+import javax.validation.Valid;
 import java.util.List;
 
 public class PostDAO {
 
     private SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
 
-    public void createPost(PostCreateDTO postDto){
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
-            postDto.setCreatedAt(LocalDateTime.now());
-            session.insert("postCreate", postDto);
-            session.commit();
+    public boolean createPost(@Valid PostCreateDTO postDto){
+        if(PostFormValidate.isValid(postDto)) {
+            try {
+                SqlSession session = sqlSessionFactory.openSession();
+                session.insert("postCreate", postDto);
+                session.commit();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        else
+            return false;
     }
 
     public int getPostCount(SearchVO searchVO){

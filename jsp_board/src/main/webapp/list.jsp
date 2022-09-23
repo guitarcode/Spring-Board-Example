@@ -175,7 +175,7 @@
             </button>
             <%
                 int offsetStart = searchVO.getPage() - (searchVO.getPage() % 10) + 1;
-                for (int i = offsetStart ; i < offsetStart + 10 && i <= (postCount / 10) + 1; i++) {
+                for (int i = offsetStart ; i < offsetStart + 10 && i <= ((postCount - 1) / 10) + 1; i++) {
 
             %>
             <button onclick="pageChange(<%=i%>)">
