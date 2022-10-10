@@ -10,7 +10,9 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="com.example.jsp_board.post.PostCreateDTO" %>
 <%@ page import="java.time.LocalDateTime" %>
-<%  request.setCharacterEncoding("UTF-8"); %>
+<%--<%@ page import="com.oreilly.servlet.MultipartRequest" %>--%>
+<%--<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>--%>
+<%--<%@ page import="java.util.Enumeration" %>--%>
 
 <html>
 <head>
@@ -18,6 +20,12 @@
 </head>
 <body>
     <%
+//        request.setCharacterEncoding("utf-8");
+//        String location = "./file";
+//        int maxSize = 1024 * 1024 * 5;
+//
+//        MultipartRequest multi = new MultipartRequest(request, location, maxSize, "utf-8", new DefaultFileRenamePolicy());
+
         PostCreateDTO post = PostCreateDTO.builder()
                 .categoryId(Integer.parseInt(request.getParameter("categoryId")))
                 .writer(request.getParameter("writer"))

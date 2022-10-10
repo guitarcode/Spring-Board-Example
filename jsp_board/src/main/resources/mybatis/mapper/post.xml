@@ -42,7 +42,9 @@
             and post.category_id = #{categoryId}
         </if>
         <if test="searchQuery != null">
-            and (title rlike #{searchQuery} or writer rlike #{searchQuery} or content rlike #{searchQuery})
+            and (title rlike #{searchQuery}
+             or writer rlike #{searchQuery}
+             or content rlike #{searchQuery})
         </if>
         </where>
         ORDER BY post_id DESC
@@ -79,7 +81,7 @@
             title = #{title},
             content = #{content},
             modified_at = #{modifiedAt}
-        WHERE post_id = #{postId}
+        WHERE post_id = #{postId} and password = SHA2(#{password},256)
     </update>
 
     <delete id="postDelete" parameterType="com.example.jsp_board.post.PostAuthVO">

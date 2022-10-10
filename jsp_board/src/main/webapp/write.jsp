@@ -63,7 +63,7 @@
 </head>
 <body>
     <div class="main">
-        <p>게시글 - 등록</p>
+        <h1>게시글 - 등록</h1>
         <form id="post-form" method="post" action="/board/write/action" onsubmit="return pwd_chk()">
             <table>
             <tr>

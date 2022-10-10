@@ -64,6 +64,23 @@
         location.href = url.toString()
     }
 
+    function pagePrevious(){
+        const params = new URLSearchParams(location.search)
+
+        const curPage = params.get("page") * 1
+        const prePage = curPage - curPage % 10
+
+        pageChange(prePage)
+    }
+
+    function pageNext() {
+        const params = new URLSearchParams(location.search)
+
+        const curPage = params.get("page") * 1
+        const nextPage = curPage - curPage % 10 + 11
+
+        pageChange(nextPage)
+    }
 
 </script>
 <style>
@@ -77,9 +94,10 @@
         box-shadow: 0 1px 20px 0 rgba(0,0,0,0.1);
         padding: 50px 50px 50px 20px;
     }
-    #table_title {
+    #table-title {
         background: antiquewhite;
         text-align: center;
+        font-weight: bold;
     }
     input {
         width: 200px;
@@ -118,7 +136,7 @@
     <div id="main">
         <span class = "search-container">
             <p class="leftContainer">
-            등록일
+            <등록일></등록일>
             <input id="start_date" class="input-font-size" value="<%=searchVO.getStartDayValue()%>" type="date"> ~
             <input id="end_date" class="input-font-size" value="<%=searchVO.getEndDayValue()%>" type="date">
             </p>
@@ -153,7 +171,7 @@
         <p class="rightContainer"><a href="/board/write"><button >글 작성</button></a></p>
         </span>
         <table>
-            <tr id="table_title">
+            <tr id="table-title">
                 <td style="width: 8%">카테고리</td>
                 <td style="width: 40%">제목</td>
                 <td style="width: 8%">글쓴이</td>
@@ -179,11 +197,12 @@
             %>
         </table>
         <span class="page-btn-container">
-            <button disabled="true">
+            <button <%=searchVO.getPage() >= 11 ? "" : "disabled"%> onclick="pagePrevious()">
                 < 이전
             </button>
             <%
                 int offsetStart = searchVO.getPage() - (searchVO.getPage() % 10) + 1;
+                int maxPage = ((postCount - 1) / 10) + 1;
                 for (int i = offsetStart ; i < offsetStart + 10 && i <= ((postCount - 1) / 10) + 1; i++) {
 
             %>
@@ -193,7 +212,7 @@
             <%
                 }
             %>
-            <button disabled="true">
+            <button <%=maxPage > searchVO.getPage() - (searchVO.getPage() % 10) + 11 ? "" : "disabled"%> onclick="pageNext()">
                 다음 >
             </button>
         </span>

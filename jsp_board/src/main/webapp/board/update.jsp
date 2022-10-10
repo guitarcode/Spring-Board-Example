@@ -99,6 +99,7 @@
                 <td class="table-title">내용</td>
                 <td><textarea id="content" name="content" placeholder="내용"><%=post.getContent()%></textarea></td>
             </tr>
+                <input type="hidden" value="<%=request.getParameter("password")%>">
           </table>
             <input type="submit" value="저장">
         </form>

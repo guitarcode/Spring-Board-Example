@@ -23,6 +23,7 @@
             .writer(request.getParameter("writer"))
             .title(request.getParameter("title"))
             .content(request.getParameter("content"))
+            .password(request.getParameter("password"))
             .modifiedAt(LocalDateTime.now())
             .build();
     PostDAO postDAO = PostDAO.getInstance();

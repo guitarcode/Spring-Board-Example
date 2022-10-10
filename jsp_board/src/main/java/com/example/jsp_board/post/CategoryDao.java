@@ -1,11 +1,13 @@
 package com.example.jsp_board.post;
 
 import com.example.jsp_board.util.MybatisSqlSessionFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 
+@Slf4j
 public class CategoryDAO {
 
     private SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
